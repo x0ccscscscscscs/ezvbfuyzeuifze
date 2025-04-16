@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgotten in the Stars</title>
+    <style>
+        /* Variables globales */
+        :root {
+            --bg-color: #090817;
+            --text-color: #b8b8d8;
+            --accent-color: #7a6bea;
+            --highlight-color: #e0defc;
+            --font-main: 'Courier New', monospace;
+        }
+
+        /* Styles de base */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzA5MDgxNyIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjAuNSIgZmlsbD0iIzQ0NDVhYSIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI3MCIgY3k9IjEwMCIgcj0iMC43IiBmaWxsPSIjNDQ0NWFhIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjUwIiByPSIwLjciIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMjMwIiBjeT0iMTIwIiByPSIwLjUiIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMzUwIiBjeT0iNzAiIHI9IjAuNiIgZmlsbD0iIzQ0NDVhYSIgZmlsbC1vcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjIwMCIgcj0iMC44IiBmaWxsPSIjNDQ0NWFhIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjE4MCIgcj0iMC40IiBmaWxsPSIjNDQ0NWFhIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjI4MCIgY3k9IjIyMCIgcj0iMC43IiBmaWxsPSIjNDQ0NWFhIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjM4MCIgY3k9IjE5MCIgcj0iMC41IiBmaWxsPSIjNDQ0NWFhIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMzAwIiByPSIwLjYiIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMTEwIiBjeT0iMjgwIiByPSIwLjUiIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMjEwIiBjeT0iMzIwIiByPSIwLjciIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMzIwIiBjeT0iMjkwIiByPSIwLjQiIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PGNpcmNsZSBjeD0iMzgwIiBjeT0iMzYwIiByPSIwLjYiIGZpbGw9IiM0NDQ1YWEiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+');
+        }
+
+        /* Effet de faible scintillement pour le fond étoilé */
+        @keyframes twinkle {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Entête */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: var(--highlight-color);
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            font-weight: normal;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--highlight-color);
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Section Introduction */
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Section Caractéristiques */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background-color: rgba(20, 20, 40, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(122, 107, 234, 0.3);
+        }
+
+        .feature-card h3 {
+            color: var(--highlight-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        /* Section Médias */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .media-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 5px;
+            border: 1px solid var(--accent-color);
+            height: 150px;
+            background-color: rgba(20, 20, 40, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--highlight-color);
+            transition: transform 0.3s;
+        }
+
+        .media-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Section Contact */
+        .contact-form {
+            background-color: rgba(20, 20, 40, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--accent-color);
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background-color: rgba(30, 30, 60, 0.5);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            border-radius: 5px;
+            font-family: var(--font-main);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--highlight-color);
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--highlight-color);
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            margin: 0 1rem;
+            color: var(--text-color);
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Effet au survol des liens */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--highlight-color);
+            text-decoration: underline;
+        }
+
+        /* Bouton de téléchargement */
+        .download-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(122, 107, 234, 0.3);
+        }
+
+        .download-button:hover {
+            background-color: transparent;
+            color: var(--highlight-color);
+            border-color: var(--highlight-color);
+            text-decoration: none;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(122, 107, 234, 0.5);
+        }
+
+        .download-button:active {
+            transform: translateY(1px);
+        }
+
+        .download-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Animation pour le bouton de téléchargement */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(122, 107, 234, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(122, 107, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(122, 107, 234, 0);
+            }
+        }
+
+        .download-button {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Forgotten in the Stars</h1>
+            <p>Explorez l'inconnu dans l'immensité spatiale</p>
+        </header>
+
+        <nav>
+            <a href="#about">À propos</a>
+            <a href="#features">Caractéristiques</a>
+            <a href="#download">Télécharger</a>
+            <a href="#media">Médias</a>
+            <a href="#contact">Contact</a>
+            <a href="https://github.com/x0ccscscscscscs/forgotten-in-the-stars" target="_blank">GitHub</a>
+        </nav>
+
+        <div class="section" id="about">
+            <h2>À propos</h2>
+            <div class="intro-text">
+                <p>Bienvenue dans l'univers de <strong>Forgotten in the Stars</strong>, un projet mystérieux explorant les confins de l'espace et du temps. Notre mission est de créer une expérience immersive où chaque joueur découvre les secrets d'un univers abandonné, naviguant à travers les étoiles oubliées et dévoilant des vérités cachées depuis des millénaires.</p>
+                <p>Inspiré par les classiques de la science-fiction et nourri par une passion pour l'exploration spatiale, ce projet vise à offrir une expérience unique mêlant narration profonde et mécaniques de jeu innovantes.</p>
+            </div>
+        </div>
+
+        <div class="section" id="features">
+            <h2>Caractéristiques</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Exploration spatiale</h3>
+                    <p>Naviguez à travers un univers généré procéduralement, où chaque système stellaire cache ses propres secrets et défis.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Narration immersive</h3>
+                    <p>Découvrez une histoire profonde qui se dévoile au fur et à mesure de votre exploration, avec des choix qui façonnent votre parcours.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Technologies futuristes</h3>
+                    <p>Utilisez et améliorez différentes technologies pour survivre dans l'hostilité de l'espace et percer ses mystères.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Personnages complexes</h3>
+                    <p>Rencontrez des êtres aux histoires riches et aux motivations complexes, forgeant des alliances ou des rivalités.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="download">
+            <h2>Télécharger</h2>
+            <div class="download-section">
+                <p>Prêt à vous embarquer dans l'aventure? Téléchargez la dernière version de Forgotten in the Stars dès maintenant!</p>
+                <a href="#" class="download-button">Télécharger v1.0.0</a>
+                <div class="download-info">
+                    <p>Compatible avec Windows, macOS et Linux</p>
+                    <p>Taille: 2.3 GB • Dernière mise à jour: March 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="media">
+            <h2>Médias</h2>
+            <div class="media-grid">
+                <div class="media-item">Aperçu 1</div>
+                <div class="media-item">Aperçu 2</div>
+                <div class="media-item">Concept Art</div>
+                <div class="media-item">Prototype</div>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact</h2>
+            <div class="contact-form">
+                <input type="text" placeholder="Votre nom">
+                <input type="email" placeholder="Votre email">
+                <textarea rows="5" placeholder="Votre message"></textarea>
+                <button type="submit">Envoyer</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/YourUsername" target="_blank">GitHub</a>
+            <a href="https://twitter.com/YourUsername" target="_blank">Twitter</a>
+            <a href="https://discord.gg/YourServer" target="_blank">Discord</a>
+        </div>
+        <p>&copy; 2025 Forgotten in the Stars. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Création des étoiles pour le fond
+        function createStars() {
+            const stars = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Position aléatoire
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Taille aléatoire
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Délai d'animation aléatoire
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                
+                stars.appendChild(star);
+            }
+        }
+        
+        // Effet de défilement fluide pour la navigation
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Initialisation
+        window.addEventListener('load', () => {
+            createStars();
+        });
+    </script>
+</body>
+</html>
